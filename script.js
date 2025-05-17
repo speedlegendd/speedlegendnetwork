@@ -4,6 +4,24 @@ const observer = new IntersectionObserver((entries) => {
     if (entry.isIntersecting) {
       // Add 'show' class to the whole section
       entry.target.classList.add('show');
+      // Copy IP to clipboard on click
+const ipBox = document.getElementById('ipBox');
+
+ipBox.addEventListener('click', () => {
+  const ipText = ipBox.textContent.replace('IP: ', '').trim();
+
+  navigator.clipboard.writeText(ipText).then(() => {
+    // Add a temporary "copied" class for tooltip
+    ipBox.classList.add('copied');
+
+    setTimeout(() => {
+      ipBox.classList.remove('copied');
+    }, 1500);
+  }).catch(err => {
+    alert('Failed to copy IP: ' + err);
+  });
+});
+
 
       // Trigger animations for image and text
       const img = entry.target.querySelector('.image-spin');
