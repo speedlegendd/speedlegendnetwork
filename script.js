@@ -1,39 +1,32 @@
-// Copy IP box text on click, show temporary 'Copied!' effect
-document.addEventListener('DOMContentLoaded', () => {
-  const ipBox = document.getElementById('server-ip');
-
-  ipBox.addEventListener('click', () => {
-    const ipText = ipBox.textContent;
-    navigator.clipboard.writeText(ipText).then(() => {
-      ipBox.classList.add('copied');
-      ipBox.textContent = 'Copied!';
-      setTimeout(() => {
-        ipBox.classList.remove('copied');
-        ipBox.textContent = ipText;
-      }, 2000);
-    }).catch(() => {
-      alert('Failed to copy IP.');
-    });
-  });
-
-  // Scroll animation for sections and text
+// Animate fade-in on scroll
+function handleScroll() {
   const sections = document.querySelectorAll('.section');
 
-  function checkScroll() {
-    const triggerBottom = window.innerHeight * 0.85;
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    if (rect.top < window.innerHeight * 0.85) {
+      section.classList.add('fade-in');
+    }
+  });
+}
 
-    sections.forEach(section => {
-      const sectionTop = section.getBoundingClientRect().top;
-      if(sectionTop < triggerBottom) {
-        section.classList.add('show');
-        const text = section.querySelector('.text');
-        if (text) {
-          text.classList.add('show');
-        }
-      }
-    });
-  }
-
-  window.addEventListener('scroll', checkScroll);
-  checkScroll(); // initial check in case already scrolled
+// IP copy to clipboard with feedback
+const ipBox = document.getElementById('server-ip');
+ipBox.addEventListener('click', () => {
+  const ip = ipBox.textContent.trim();
+  navigator.clipboard.writeText(ip).then(() => {
+    ipBox.textContent = 'Copied: ' + ip;
+    ipBox.style.background = '#4caf50';
+    ipBox.style.color = '#fff';
+    setTimeout(() => {
+      ipBox.textContent = ip;
+      ipBox.style.background = 'linear-gradient(45deg, #22c1c3, #fdbb2d)';
+      ipBox.style.color = '#0a0a0a';
+    }, 1500);
+  });
 });
+
+window.addEventListener('scroll', handleScroll);
+
+// Initial check in case some sections are visible on load
+handleScroll();
