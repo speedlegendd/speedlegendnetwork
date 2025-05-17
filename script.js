@@ -1,32 +1,40 @@
-// Animate fade-in on scroll
-function handleScroll() {
+// Animate all sections with class 'section' when scrolled into view
+window.addEventListener('scroll', () => {
   const sections = document.querySelectorAll('.section');
+  const windowHeight = window.innerHeight;
 
   sections.forEach(section => {
     const rect = section.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.85) {
-      section.classList.add('fade-in');
-    }
-  });
-}
 
-// IP copy to clipboard with feedback
-const ipBox = document.getElementById('server-ip');
-ipBox.addEventListener('click', () => {
-  const ip = ipBox.textContent.trim();
-  navigator.clipboard.writeText(ip).then(() => {
-    ipBox.textContent = 'Copied: ' + ip;
-    ipBox.style.background = '#4caf50';
-    ipBox.style.color = '#fff';
-    setTimeout(() => {
-      ipBox.textContent = ip;
-      ipBox.style.background = 'linear-gradient(45deg, #fdbb2d, #22c1c3)';
-      ipBox.style.color = '#0a0a0a';
-    }, 1500);
+    if (rect.top <= windowHeight * 0.8) {
+      // Animate image inside this section
+      const image = section.querySelector('.image-spin');
+      if (image) {
+        image.style.animationPlayState = 'running';
+      }
+      // Show section & text
+      section.classList.add('show');
+
+      const text = section.querySelector('.text');
+      if (text) {
+        text.classList.add('show');
+      }
+    }
   });
 });
 
-window.addEventListener('scroll', handleScroll);
+// IP copy functionality
+const ipBox = document.getElementById('ipBox');
 
-// Initial check in case some sections are visible on load
-handleScroll();
+ipBox.addEventListener('click', () => {
+  const ipText = ipBox.textContent.replace('IP: ', '').trim();
+
+  navigator.clipboard.writeText(ipText).then(() => {
+    ipBox.classList.add('copied');
+    setTimeout(() => {
+      ipBox.classList.remove('copied');
+    }, 1500);
+  }).catch(err => {
+    alert('Failed to copy IP: ' + err);
+  });
+});
