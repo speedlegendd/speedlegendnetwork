@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Join Our Minecraft Server!</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #1a1a1a, #333);
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      perspective: 1000px;
+    }
+
+    .container {
+      background: rgba(0, 0, 0, 0.8);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+      transform-style: preserve-3d;
+      transition: transform 0.3s ease;
+      text-align: center;
+    }
+
+    .container:hover {
+      transform: rotateY(10deg) rotateX(5deg);
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #00ff88;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px #00ff88;
+    }
+
+    p {
+      font-size: 1.1rem;
+      margin-bottom: 30px;
+    }
+
+    .ip-box {
+      font-size: 1.4rem;
+      background: #111;
+      padding: 10px 20px;
+      border: 2px dashed #00ff88;
+      border-radius: 10px;
+      display: inline-block;
+      user-select: all;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .ip-box:hover {
+      background: #222;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 0.9rem;
+      opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌍 Welcome to BlockVerse!</h1>
+    <p>Join our epic survival Minecraft server with custom plugins, active staff, and a thriving community!</p>
+    <div class="ip-box" onclick="copyIP()">play.blockverse.net</div>
+    <div class="footer">Click the IP to copy & join us now!</div>
+  </div>
+
+  <script>
+    function copyIP() {
+      const ip = 'play.blockverse.net';
+      navigator.clipboard.writeText(ip).then(() => {
+        alert('IP copied to clipboard!');
+      });
+    }
+  </script>
+</body>
+</html>
