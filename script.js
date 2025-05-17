@@ -20,7 +20,7 @@ ipBox.addEventListener('click', () => {
     ipBox.style.color = '#fff';
     setTimeout(() => {
       ipBox.textContent = ip;
-      ipBox.style.background = 'linear-gradient(45deg, #22c1c3, #fdbb2d)';
+      ipBox.style.background = 'linear-gradient(45deg, #fdbb2d, #22c1c3)';
       ipBox.style.color = '#0a0a0a';
     }, 1500);
   });
