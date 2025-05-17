@@ -8,32 +8,18 @@ body {
   overflow-x: hidden;
 }
 
-/* Section Layout */
-.section {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  min-height: 100vh;
-  padding: 60px;
-  gap: 40px;
-  opacity: 0;
-  transform: translateY(60px);
-  transition: opacity 1s ease, transform 1s ease;
-  flex-wrap: wrap;
+/* Container to position the IP box */
+.container {
   position: relative;
-  flex-direction: row;
+  padding-top: 80px; /* space for IP box */
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-/* When visible */
-.section.show {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Animated IP Box - Positioned Above Everything */
+/* Position IP box absolutely at top center of container */
 .ip-box {
   position: absolute;
-  top: 20px;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   background: linear-gradient(135deg, #00ffff, #008080);
@@ -56,7 +42,7 @@ body {
   box-shadow: 0 0 30px #00eaff, 0 0 40px #006666;
 }
 
-/* Tooltip styling */
+/* Tooltip for copied */
 .ip-box.copied::after {
   content: "Copied!";
   position: absolute;
@@ -74,13 +60,35 @@ body {
 }
 
 @keyframes fadeOutTooltip {
-  0% {opacity: 1;}
-  100% {opacity: 0;}
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+/* Section Layout */
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 100vh;
+  padding: 60px;
+  gap: 40px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease, transform 1s ease;
+  flex-wrap: wrap;
+  position: relative;
+  flex-direction: row;
+}
+
+/* When visible */
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Image Styling and Animation */
 .image-spin {
-  width: 625px;  /* 25% bigger from before (500 * 1.25) */
+  width: 625px;  /* 25% bigger */
   max-width: 90%;
   transform: translateX(-120vw) rotateY(720deg);
   animation: slideSpin 2s ease-out forwards;
@@ -101,8 +109,8 @@ body {
 
 /* Text Section */
 .text {
-  max-width: 750px; /* 25% bigger from before */
-  font-size: 1.875rem; /* 1.5rem * 1.25 */
+  max-width: 750px; /* 25% bigger */
+  font-size: 1.875rem;
   opacity: 0.2;
   transition: opacity 2s ease;
   color: #c0f9f9;
@@ -114,7 +122,7 @@ body {
 
 /* Glowing Header Text */
 h2 {
-  font-size: 3.5rem; /* 2.8rem * 1.25 */
+  font-size: 3.5rem; /* 25% bigger */
   color: #00ffff;
   text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #00ffff;
   animation: glow 2s ease-in-out infinite alternate;
@@ -130,7 +138,7 @@ h2 {
   }
 }
 
-/* Responsive (Mobile Friendly) */
+/* Responsive */
 @media (max-width: 768px) {
   .section {
     flex-direction: column;
