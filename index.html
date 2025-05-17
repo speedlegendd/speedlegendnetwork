@@ -2,91 +2,113 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Join Our Minecraft Server!</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Speed_Legendd Lifesteal Server</title>
+
+  <!-- Minecraft Font -->
+  <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet" />
+
   <style>
-    * {
+    body {
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
+      background: #0c0c0c;
+      font-family: 'Minecraft', sans-serif;
+      color: #fff;
     }
 
-    body {
-      height: 100vh;
-      background: linear-gradient(135deg, #1a1a1a, #333);
-      font-family: 'Segoe UI', sans-serif;
-      color: white;
+    .section {
       display: flex;
-      justify-content: center;
       align-items: center;
-      overflow: hidden;
-      perspective: 1000px;
+      justify-content: space-around;
+      min-height: 100vh;
+      padding: 50px;
+      gap: 40px;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 1s ease, transform 1s ease;
     }
 
-    .container {
-      background: rgba(0, 0, 0, 0.8);
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
-      transform-style: preserve-3d;
-      transition: transform 0.3s ease;
-      text-align: center;
+    .section.show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .container:hover {
-      transform: rotateY(10deg) rotateX(5deg);
+    .image-spin {
+      width: 320px;
+      height: auto;
+      transform: rotateY(360deg);
+      transition: transform 1s ease;
     }
 
-    h1 {
-      font-size: 2.5rem;
-      color: #00ff88;
-      margin-bottom: 20px;
-      text-shadow: 0 0 10px #00ff88;
+    .image-spin.show {
+      transform: rotateY(0deg);
     }
 
-    p {
+    .text {
+      max-width: 500px;
       font-size: 1.1rem;
-      margin-bottom: 30px;
+      opacity: 0.2;
+      transition: opacity 2s ease;
     }
 
-    .ip-box {
-      font-size: 1.4rem;
-      background: #111;
-      padding: 10px 20px;
-      border: 2px dashed #00ff88;
-      border-radius: 10px;
-      display: inline-block;
-      user-select: all;
-      cursor: pointer;
-      transition: background 0.3s;
+    .text.show {
+      opacity: 1;
     }
 
-    .ip-box:hover {
-      background: #222;
+    h2 {
+      font-size: 2rem;
+      color: #0ff;
+      text-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff;
+      animation: glow 2s ease-in-out infinite alternate;
     }
 
-    .footer {
-      margin-top: 25px;
-      font-size: 0.9rem;
-      opacity: 0.6;
+    @keyframes glow {
+      from {
+        text-shadow: 0 0 5px #0ff, 0 0 10px #0ff;
+      }
+      to {
+        text-shadow: 0 0 20px #00f6ff, 0 0 30px #00f6ff;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .section {
+        flex-direction: column;
+        text-align: center;
+      }
+      .image-spin {
+        width: 80%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>🌍 Welcome to BlockVerse!</h1>
-    <p>Join our epic survival Minecraft server with custom plugins, active staff, and a thriving community!</p>
-    <div class="ip-box" onclick="copyIP()">play.blockverse.net</div>
-    <div class="footer">Click the IP to copy & join us now!</div>
+
+  <div class="section" id="lifesteal-section">
+    <img src="1.png" alt="Lifesteal Server" class="image-spin" />
+    <div class="text">
+      <h2>🔥 Speed_Legendd Lifesteal</h2>
+      <p>Join the ultimate Minecraft Lifesteal experience! Gain hearts by defeating players, build alliances, and become the most feared legend on the server. Hosted at <strong>Speed_Legendd.aternos.me:34406</strong></p>
+    </div>
   </div>
 
   <script>
-    function copyIP() {
-      const ip = 'play.blockverse.net';
-      navigator.clipboard.writeText(ip).then(() => {
-        alert('IP copied to clipboard!');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          const img = entry.target.querySelector('.image-spin');
+          const text = entry.target.querySelector('.text');
+          img?.classList.add('show');
+          text?.classList.add('show');
+        }
       });
-    }
+    }, { threshold: 0.3 });
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
   </script>
 </body>
 </html>
