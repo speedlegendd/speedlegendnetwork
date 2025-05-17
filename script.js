@@ -1,7 +1,6 @@
 // Animate all sections with class 'section' when scrolled into view
 window.addEventListener('scroll', () => {
   const sections = document.querySelectorAll('.section');
-
   const windowHeight = window.innerHeight;
 
   sections.forEach(section => {
@@ -24,7 +23,7 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// IP copy functionality (unchanged)
+// IP copy functionality
 const ipBox = document.getElementById('ipBox');
 
 ipBox.addEventListener('click', () => {
