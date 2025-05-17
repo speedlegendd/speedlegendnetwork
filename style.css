@@ -1,0 +1,98 @@
+/* Basic Page Styling */
+body {
+  margin: 0;
+  padding: 0;
+  background: #0a0a0a;
+  font-family: 'Minecraft', sans-serif;
+  color: #ffffff;
+  overflow-x: hidden;
+}
+
+/* Section Layout */
+.section {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 100vh;
+  padding: 60px;
+  gap: 40px;
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+/* When visible */
+.section.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Image Styling and Animation */
+.image-spin {
+  width: 500px;
+  max-width: 90%;
+  transform: translateX(-120vw) rotateY(720deg);
+  animation: slideSpin 2s ease-out forwards;
+  animation-play-state: paused;
+}
+
+@keyframes slideSpin {
+  0% {
+    transform: translateX(-120vw) rotateY(720deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0) rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+/* Text Section */
+.text {
+  max-width: 600px;
+  font-size: 1.5rem;
+  opacity: 0.2;
+  transition: opacity 2s ease;
+}
+
+.text.show {
+  opacity: 1;
+}
+
+/* Glowing Header Text */
+h2 {
+  font-size: 2.8rem;
+  color: #00ffff;
+  text-shadow: 0 0 8px #00ffff, 0 0 16px #00ffff, 0 0 24px #00ffff;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px #00ffff;
+  }
+  to {
+    text-shadow: 0 0 20px #00eaff, 0 0 30px #00eaff;
+  }
+}
+
+/* Responsive (Mobile Friendly) */
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .image-spin {
+    width: 80%;
+  }
+
+  .text {
+    font-size: 1.2rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+}
