@@ -44,7 +44,7 @@ body {
   box-shadow: 0 0 20px #88cc88;
 }
 
-/* Sections */
+/* Sections container */
 .section {
   display: flex;
   align-items: center;
@@ -56,12 +56,19 @@ body {
   transition: opacity 1s ease, transform 1s ease;
 }
 
+/* Show sections on scroll */
 .section.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-.section:nth-child(even) {
+/* Ensure first section has image left, text right */
+.section#lifesteal-section {
+  flex-direction: row;
+}
+
+/* Ensure second section has image right, text left */
+.section#official-section {
   flex-direction: row-reverse;
 }
 
