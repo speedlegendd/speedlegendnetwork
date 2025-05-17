@@ -22,10 +22,10 @@ body {
   border: 2px solid #66ff66;
   color: #66ff66;
   font-weight: bold;
-  font-size: 1.2rem;
-  padding: 12px 20px;
-  margin-bottom: 30px;
-  border-radius: 12px;
+  font-size: 0.9rem; /* scaled down */
+  padding: 9px 15px; /* scaled down */
+  margin-bottom: 22px; /* scaled down */
+  border-radius: 9px; /* scaled down */
   box-shadow: 0 0 8px #66ff66;
   display: inline-block;
   user-select: none;
@@ -74,7 +74,7 @@ body {
 
 /* Image */
 .image-spin {
-  width: 325px;
+  width: 244px; /* 325px * 0.75 */
   height: auto;
   border-radius: 20px;
   box-shadow: 0 0 20px #33cc33;
@@ -91,12 +91,14 @@ body {
 
 /* Text */
 .text {
-  max-width: 450px;
+  max-width: 337px; /* 450px * 0.75 */
   text-align: left;
   color: #bbb;
   opacity: 0.4;
   transition: opacity 1.5s ease;
   user-select: none;
+  font-size: 0.825rem; /* ~1.1rem * 0.75 */
+  line-height: 1.2;
 }
 
 .text.show {
@@ -110,8 +112,8 @@ body {
 
 /* Headings with glowing text */
 h2 {
-  font-size: 2.3rem;
-  margin-bottom: 15px;
+  font-size: 1.725rem; /* 2.3rem * 0.75 */
+  margin-bottom: 11px; /* 15px * 0.75 */
   color: #77ee77;
   text-shadow:
     0 0 10px #77ee77,
@@ -123,8 +125,8 @@ h2 {
 
 /* Paragraph */
 p {
-  font-size: 1.1rem;
-  line-height: 1.5;
+  font-size: 0.825rem; /* scaled down */
+  line-height: 1.2;
 }
 
 /* Animations */
@@ -169,10 +171,11 @@ p {
   }
 
   .image-spin {
-    width: 80%;
+    width: 60%;
   }
 
   .text {
+    font-size: 0.9rem;
     text-align: center;
     max-width: 100%;
   }
