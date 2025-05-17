@@ -1,39 +1,17 @@
-// Create an intersection observer to detect when the section is visible
+// Intersection Observer to animate section on scroll
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      // Add 'show' class to the whole section
       entry.target.classList.add('show');
-      // Copy IP to clipboard on click
-const ipBox = document.getElementById('ipBox');
 
-ipBox.addEventListener('click', () => {
-  const ipText = ipBox.textContent.replace('IP: ', '').trim();
-
-  navigator.clipboard.writeText(ipText).then(() => {
-    // Add a temporary "copied" class for tooltip
-    ipBox.classList.add('copied');
-
-    setTimeout(() => {
-      ipBox.classList.remove('copied');
-    }, 1500);
-  }).catch(err => {
-    alert('Failed to copy IP: ' + err);
-  });
-});
-
-
-      // Trigger animations for image and text
       const img = entry.target.querySelector('.image-spin');
       const text = entry.target.querySelector('.text');
 
-      // Resume image animation
       if (img) {
         img.style.animationPlayState = "running";
         img.classList.add('show');
       }
 
-      // Show text
       if (text) {
         text.classList.add('show');
       }
@@ -41,8 +19,22 @@ ipBox.addEventListener('click', () => {
   });
 }, { threshold: 0.3 });
 
-// Observe each section with class 'section'
 document.querySelectorAll('.section').forEach(section => {
   observer.observe(section);
 });
 
+// Copy IP to clipboard on click
+const ipBox = document.getElementById('ipBox');
+
+ipBox.addEventListener('click', () => {
+  const ipText = ipBox.textContent.replace('IP: ', '').trim();
+
+  navigator.clipboard.writeText(ipText).then(() => {
+    ipBox.classList.add('copied');
+    setTimeout(() => {
+      ipBox.classList.remove('copied');
+    }, 1500);
+  }).catch(err => {
+    alert('Failed to copy IP: ' + err);
+  });
+});
