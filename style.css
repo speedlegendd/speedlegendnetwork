@@ -1,4 +1,4 @@
-/* Container and general */
+/* General Styles */
 body {
   margin: 0;
   background: #111;
@@ -15,7 +15,7 @@ body {
   position: relative;
 }
 
-/* IP Box styling */
+/* IP Box */
 .ip-box {
   cursor: pointer;
   background: #222;
@@ -44,15 +44,15 @@ body {
   box-shadow: 0 0 20px #88cc88;
 }
 
-/* Sections container */
+/* Section container */
 .section {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 80px;
+  gap: 22.5px; /* 30px * 0.75 */
+  margin-bottom: 60px; /* 80px * 0.75 */
   opacity: 0;
-  transform: translateY(60px);
+  transform: translateY(45px); /* 60px * 0.75 */
   transition: opacity 1s ease, transform 1s ease;
 }
 
@@ -62,19 +62,18 @@ body {
   transform: translateY(0);
 }
 
-/* Ensure first section has image left, text right */
+/* Alternate layout */
 .section#lifesteal-section {
   flex-direction: row;
 }
 
-/* Ensure second section has image right, text left */
 .section#official-section {
   flex-direction: row-reverse;
 }
 
-/* Image */
+/* Images */
 .image-spin {
-  width: 244px; /* 325px * 0.75 */
+  width: 243.75px; /* 325px * 0.75 */
   height: auto;
   border-radius: 20px;
   box-shadow: 0 0 20px #33cc33;
@@ -84,20 +83,20 @@ body {
   transition: transform 0.5s ease;
 }
 
-/* On show, spin animation runs */
+/* Animate spin only when visible */
 .section.show .image-spin {
   animation-play-state: running;
 }
 
-/* Text */
+/* Text area */
 .text {
-  max-width: 337px; /* 450px * 0.75 */
+  max-width: 337.5px; /* 450px * 0.75 */
   text-align: left;
   color: #bbb;
   opacity: 0.4;
   transition: opacity 1.5s ease;
   user-select: none;
-  font-size: 0.825rem; /* ~1.1rem * 0.75 */
+  font-size: 0.825rem; /* 1.1rem * 0.75 */
   line-height: 1.2;
 }
 
@@ -110,10 +109,10 @@ body {
     0 0 25px #44aa44;
 }
 
-/* Headings with glowing text */
+/* Headings */
 h2 {
   font-size: 1.725rem; /* 2.3rem * 0.75 */
-  margin-bottom: 11px; /* 15px * 0.75 */
+  margin-bottom: 11.25px; /* 15px * 0.75 */
   color: #77ee77;
   text-shadow:
     0 0 10px #77ee77,
@@ -125,29 +124,26 @@ h2 {
 
 /* Paragraph */
 p {
-  font-size: 0.825rem; /* scaled down */
+  font-size: 0.825rem;
   line-height: 1.2;
 }
 
 /* Animations */
-
-/* Spin image around left-right then to center */
 @keyframes spin-in-place {
   0% {
     transform: rotate(0deg) translateX(0);
   }
   40% {
-    transform: rotate(360deg) translateX(80px);
+    transform: rotate(360deg) translateX(60px); /* scaled from 80px */
   }
   70% {
-    transform: rotate(720deg) translateX(-80px);
+    transform: rotate(720deg) translateX(-60px);
   }
   100% {
     transform: rotate(1080deg) translateX(0);
   }
 }
 
-/* Glow pulse */
 @keyframes glow-pulse {
   0%, 100% {
     text-shadow:
@@ -167,7 +163,7 @@ p {
 @media (max-width: 768px) {
   .section {
     flex-direction: column !important;
-    gap: 20px;
+    gap: 15px;
   }
 
   .image-spin {
