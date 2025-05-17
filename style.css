@@ -1,158 +1,179 @@
-/* Reset and base */
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* Container and general */
 body {
-  font-family: 'Press Start 2P', cursive;
-  background: #0a0a0a;
-  color: #eee;
+  margin: 0;
+  background: #111;
+  font-family: 'Minecraft', monospace, sans-serif;
+  color: #ccc;
   overflow-x: hidden;
-  padding: 50px 25px; /* increased padding for bigger content */
 }
 
 .container {
-  max-width: 1125px; /* 900 * 1.25 */
-  margin: 0 auto;
+  width: 90%;
+  max-width: 1000px;
+  margin: 40px auto;
+  text-align: center;
+  position: relative;
 }
 
-/* IP Box */
+/* IP Box styling */
 .ip-box {
-  background: linear-gradient(45deg, #fdbb2d, #22c1c3);
-  color: #0a0a0a;
-  font-weight: bold;
-  font-size: 1.375rem; /* 1.1rem * 1.25 */
-  padding: 18.75px 37.5px; /* 15px & 30px * 1.25 */
-  border-radius: 12.5px;
-  width: fit-content;
-  margin: 0 auto 62.5px auto; /* 50px * 1.25 */
   cursor: pointer;
-  box-shadow: 0 0 18.75px #fdbb2d;
+  background: #222;
+  border: 2px solid #66ff66;
+  color: #66ff66;
+  font-weight: bold;
+  font-size: 1.2rem;
+  padding: 12px 20px;
+  margin-bottom: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px #66ff66;
+  display: inline-block;
   user-select: none;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.3s ease;
 }
 
-.ip-box:active {
-  background: #fdbb2d;
-  box-shadow: 0 0 37.5px #22c1c3;
+.ip-box:hover {
+  box-shadow: 0 0 15px #aaffaa;
+  color: #aaffaa;
 }
 
-/* Section layout */
+.ip-box.copied {
+  background: #aaffaa;
+  color: #111;
+  border-color: #88cc88;
+  box-shadow: 0 0 20px #88cc88;
+}
+
+/* Sections container */
 .section {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 87.5px; /* 70px * 1.25 */
-  gap: 62.5px; /* 50px * 1.25 */
+  gap: 30px;
+  margin-bottom: 80px;
   opacity: 0;
-  transform: translateY(62.5px); /* 50px * 1.25 */
+  transform: translateY(60px);
   transition: opacity 1s ease, transform 1s ease;
 }
 
-.section.fade-in {
+/* Show sections on scroll */
+.section.show {
   opacity: 1;
   transform: translateY(0);
 }
 
-.section.left {
+/* Ensure first section has image left, text right */
+.section#lifesteal-section {
   flex-direction: row;
 }
 
-.section.right {
+/* Ensure second section has image right, text left */
+.section#official-section {
   flex-direction: row-reverse;
 }
 
-/* Image styling */
+/* Image */
 .image-spin {
-  width: 375px; /* 300px * 1.25 */
+  width: 325px;
   height: auto;
-  border-radius: 18.75px; /* 15px * 1.25 */
-  box-shadow: 0 0 25px #fdbb2d;
-  animation: spin-slide 4s ease forwards;
+  border-radius: 20px;
+  box-shadow: 0 0 20px #33cc33;
+  animation: spin-in-place 5s linear infinite paused;
   transform-origin: center center;
+  cursor: default;
+  transition: transform 0.5s ease;
 }
 
-/* Text styling */
+/* On show, spin animation runs */
+.section.show .image-spin {
+  animation-play-state: running;
+}
+
+/* Text */
 .text {
-  max-width: 625px; /* 500px * 1.25 */
-  font-size: 1.375rem; /* 1.1rem * 1.25 */
-  color: #ccc;
+  max-width: 450px;
   text-align: left;
-  line-height: 1.4;
+  color: #bbb;
+  opacity: 0.4;
+  transition: opacity 1.5s ease;
+  user-select: none;
 }
 
-.text h2 {
-  font-size: 2rem; /* 1.6rem * 1.25 */
-  margin-bottom: 18.75px; /* 15px * 1.25 */
-  color: #fdbb2d;
+.text.show {
+  opacity: 1;
+  color: #99ff99;
   text-shadow:
-    0 0 15px #fdbb2d,
-    0 0 30px #fdbb2d,
-    0 0 45px #fdbb2d;
+    0 0 8px #99ff99,
+    0 0 15px #66cc66,
+    0 0 25px #44aa44;
 }
 
-/* Glowing text effect */
-.glow-text {
-  animation: glow 3s ease-in-out infinite alternate;
+/* Headings with glowing text */
+h2 {
+  font-size: 2.3rem;
+  margin-bottom: 15px;
+  color: #77ee77;
+  text-shadow:
+    0 0 10px #77ee77,
+    0 0 20px #55cc55,
+    0 0 30px #44aa44;
+  user-select: none;
+  animation: glow-pulse 3s ease-in-out infinite;
 }
 
-@keyframes glow {
+/* Paragraph */
+p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+/* Animations */
+
+/* Spin image around left-right then to center */
+@keyframes spin-in-place {
   0% {
-    text-shadow:
-      0 0 8px #fdbb2d,
-      0 0 16px #fdbb2d,
-      0 0 24px #fdbb2d;
-    color: #fdbb2d;
+    transform: rotate(0deg) translateX(0);
+  }
+  40% {
+    transform: rotate(360deg) translateX(80px);
+  }
+  70% {
+    transform: rotate(720deg) translateX(-80px);
   }
   100% {
+    transform: rotate(1080deg) translateX(0);
+  }
+}
+
+/* Glow pulse */
+@keyframes glow-pulse {
+  0%, 100% {
     text-shadow:
-      0 0 24px #fff,
-      0 0 48px #fff,
-      0 0 60px #fdbb2d;
-    color: #fff;
+      0 0 10px #77ee77,
+      0 0 20px #55cc55,
+      0 0 30px #44aa44;
   }
-}
-
-/* Spin and slide animation */
-@keyframes spin-slide {
-  0% {
-    transform: translateX(-100vw) rotate(0deg);
-    opacity: 0;
+  50% {
+    text-shadow:
+      0 0 20px #aaffaa,
+      0 0 30px #88cc88,
+      0 0 40px #66bb66;
   }
-  60% {
-    transform: translateX(25px) rotate(360deg);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(0) rotate(360deg);
-    opacity: 1;
-  }
-}
-
-/* Fade in utility */
-.fade-in {
-  opacity: 1 !important;
-  transform: translateY(0) !important;
 }
 
 /* Responsive */
-@media screen and (max-width: 768px) {
+@media (max-width: 768px) {
   .section {
     flex-direction: column !important;
-    text-align: center;
+    gap: 20px;
   }
+
   .image-spin {
-    width: 100%;
-    max-width: 90vw;
-    margin-bottom: 25px;
+    width: 80%;
   }
+
   .text {
+    text-align: center;
     max-width: 100%;
-  }
-  .ip-box {
-    font-size: 1.1rem;
-    padding: 12.5px 25px;
   }
 }
