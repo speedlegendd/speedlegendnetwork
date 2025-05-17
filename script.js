@@ -1,29 +1,20 @@
-// Intersection Observer to animate section on scroll
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('show');
+// Animate image and text on scroll into view
+window.addEventListener('scroll', () => {
+  const section = document.getElementById('lifesteal-section');
+  const image = document.querySelector('.image-spin');
+  const text = document.querySelector('.text');
 
-      const img = entry.target.querySelector('.image-spin');
-      const text = entry.target.querySelector('.text');
+  const rect = section.getBoundingClientRect();
+  const windowHeight = window.innerHeight;
 
-      if (img) {
-        img.style.animationPlayState = "running";
-        img.classList.add('show');
-      }
-
-      if (text) {
-        text.classList.add('show');
-      }
-    }
-  });
-}, { threshold: 0.3 });
-
-document.querySelectorAll('.section').forEach(section => {
-  observer.observe(section);
+  if (rect.top <= windowHeight * 0.8) {
+    image.style.animationPlayState = 'running';
+    section.classList.add('show');
+    text.classList.add('show');
+  }
 });
 
-// Copy IP to clipboard on click
+// IP copy functionality
 const ipBox = document.getElementById('ipBox');
 
 ipBox.addEventListener('click', () => {
