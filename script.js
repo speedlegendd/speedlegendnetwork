@@ -1,20 +1,30 @@
-// Animate image and text on scroll into view
+// Animate all sections with class 'section' when scrolled into view
 window.addEventListener('scroll', () => {
-  const section = document.getElementById('lifesteal-section');
-  const image = document.querySelector('.image-spin');
-  const text = document.querySelector('.text');
+  const sections = document.querySelectorAll('.section');
 
-  const rect = section.getBoundingClientRect();
   const windowHeight = window.innerHeight;
 
-  if (rect.top <= windowHeight * 0.8) {
-    image.style.animationPlayState = 'running';
-    section.classList.add('show');
-    text.classList.add('show');
-  }
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+
+    if (rect.top <= windowHeight * 0.8) {
+      // Animate image inside this section
+      const image = section.querySelector('.image-spin');
+      if (image) {
+        image.style.animationPlayState = 'running';
+      }
+      // Show section & text
+      section.classList.add('show');
+
+      const text = section.querySelector('.text');
+      if (text) {
+        text.classList.add('show');
+      }
+    }
+  });
 });
 
-// IP copy functionality
+// IP copy functionality (unchanged)
 const ipBox = document.getElementById('ipBox');
 
 ipBox.addEventListener('click', () => {
