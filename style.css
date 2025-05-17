@@ -2,7 +2,7 @@
 body {
   margin: 0;
   background: #111;
-  font-family: 'Minecraft', monospace, sans-serif;
+  font-family: 'Press Start 2P', monospace, sans-serif;
   color: #ccc;
   overflow-x: hidden;
 }
@@ -23,9 +23,9 @@ body {
   color: #66ff66;
   font-weight: bold;
   font-size: 0.9rem; /* scaled down */
-  padding: 9px 15px; /* scaled down */
-  margin-bottom: 22px; /* scaled down */
-  border-radius: 9px; /* scaled down */
+  padding: 9px 15px;
+  margin-bottom: 22px;
+  border-radius: 9px;
   box-shadow: 0 0 8px #66ff66;
   display: inline-block;
   user-select: none;
@@ -63,11 +63,11 @@ body {
 }
 
 /* Alternate layout */
-.section#lifesteal-section {
+#lifesteal-section {
   flex-direction: row;
 }
 
-.section#official-section {
+#official-section {
   flex-direction: row-reverse;
 }
 
@@ -96,7 +96,7 @@ body {
   opacity: 0.4;
   transition: opacity 1.5s ease;
   user-select: none;
-  font-size: 0.825rem; /* 1.1rem * 0.75 */
+  font-size: 0.825rem;
   line-height: 1.2;
 }
 
@@ -111,8 +111,8 @@ body {
 
 /* Headings */
 h2 {
-  font-size: 1.725rem; /* 2.3rem * 0.75 */
-  margin-bottom: 11.25px; /* 15px * 0.75 */
+  font-size: 1.725rem;
+  margin-bottom: 11.25px;
   color: #77ee77;
   text-shadow:
     0 0 10px #77ee77,
@@ -134,7 +134,7 @@ p {
     transform: rotate(0deg) translateX(0);
   }
   40% {
-    transform: rotate(360deg) translateX(60px); /* scaled from 80px */
+    transform: rotate(360deg) translateX(60px);
   }
   70% {
     transform: rotate(720deg) translateX(-60px);
