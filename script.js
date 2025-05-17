@@ -1,40 +1,39 @@
-// Animate all sections with class 'section' when scrolled into view
-window.addEventListener('scroll', () => {
+// Copy IP box text on click, show temporary 'Copied!' effect
+document.addEventListener('DOMContentLoaded', () => {
+  const ipBox = document.getElementById('server-ip');
+
+  ipBox.addEventListener('click', () => {
+    const ipText = ipBox.textContent;
+    navigator.clipboard.writeText(ipText).then(() => {
+      ipBox.classList.add('copied');
+      ipBox.textContent = 'Copied!';
+      setTimeout(() => {
+        ipBox.classList.remove('copied');
+        ipBox.textContent = ipText;
+      }, 2000);
+    }).catch(() => {
+      alert('Failed to copy IP.');
+    });
+  });
+
+  // Scroll animation for sections and text
   const sections = document.querySelectorAll('.section');
-  const windowHeight = window.innerHeight;
 
-  sections.forEach(section => {
-    const rect = section.getBoundingClientRect();
+  function checkScroll() {
+    const triggerBottom = window.innerHeight * 0.85;
 
-    if (rect.top <= windowHeight * 0.8) {
-      // Animate image inside this section
-      const image = section.querySelector('.image-spin');
-      if (image) {
-        image.style.animationPlayState = 'running';
+    sections.forEach(section => {
+      const sectionTop = section.getBoundingClientRect().top;
+      if(sectionTop < triggerBottom) {
+        section.classList.add('show');
+        const text = section.querySelector('.text');
+        if (text) {
+          text.classList.add('show');
+        }
       }
-      // Show section & text
-      section.classList.add('show');
+    });
+  }
 
-      const text = section.querySelector('.text');
-      if (text) {
-        text.classList.add('show');
-      }
-    }
-  });
-});
-
-// IP copy functionality
-const ipBox = document.getElementById('ipBox');
-
-ipBox.addEventListener('click', () => {
-  const ipText = ipBox.textContent.replace('IP: ', '').trim();
-
-  navigator.clipboard.writeText(ipText).then(() => {
-    ipBox.classList.add('copied');
-    setTimeout(() => {
-      ipBox.classList.remove('copied');
-    }, 1500);
-  }).catch(err => {
-    alert('Failed to copy IP: ' + err);
-  });
+  window.addEventListener('scroll', checkScroll);
+  checkScroll(); // initial check in case already scrolled
 });
